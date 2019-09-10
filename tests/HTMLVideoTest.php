@@ -13,13 +13,17 @@ class HTMLVideoTest extends TestCase
 
 	public function testVideoWithActualURLs()
 	{
-		$video = new HTMLVideo( [ [ 'url' => 'video.mp4', 'type' => 'mp4' ], [ 'url' => 'movie.webm', 'type' => 'webm' ] ] );
-		$this->assertEquals( '<video><source type="video/mp4" src="video.mp4"><source type="video/webm" src="movie.webm"></video>', $video->getHTML() );
+		$video = new HTMLVideo( [ [ 'src' => 'video.mp4', 'type' => 'mp4' ], [ 'src' => 'movie.webm', 'type' => 'webm' ] ] );
+		$this->assertStringContainsString( ' type="video/mp4"', $video->getHTML() );
+		$this->assertStringContainsString( ' src="video.mp4"', $video->getHTML() );
+		$this->assertStringContainsString( ' type="video/webm"', $video->getHTML() );
+		$this->assertStringContainsString( ' src="movie.webm', $video->getHTML() );
 	}
 
 	public function testVideoWithAttributes()
 	{
-		$video = new HTMLVideo( [ [ 'url' => 'video.mp4', 'type' => 'mp4' ], [ 'url' => 'movie.webm', 'type' => 'webm' ] ], [ 'muted' => "true", 'controls' => "controls", 'preload' => "none", 'autoplay' => "autoplay", 'width' => "1200", 'height' => "674", 'class' => "center-img" ] );
-		$this->assertEquals( '<video muted="true" controls="controls" preload="none" autoplay="autoplay" width="1200" height="674" class="center-img"><source type="video/mp4" src="video.mp4"><source type="video/webm" src="movie.webm"></video>', $video->getHTML() );
+		$video = new HTMLVideo( [ [ 'src' => 'video.mp4', 'type' => 'mp4', 'media' => '(max-width:480px)' ], [ 'src' => 'movie.webm', 'type' => 'webm' ] ], [ 'muted' => "true", 'controls' => "controls", 'preload' => "none", 'autoplay' => "autoplay", 'width' => "1200", 'height' => "674", 'class' => "center-img" ] );
+		$this->assertStringContainsString( '<video muted="true" controls="controls" preload="none" autoplay="autoplay" width="1200" height="674" class="center-img">', $video->getHTML() );
+		$this->assertStringContainsString( ' media="(max-width:480px)"', $video->getHTML() );
 	}
 }
