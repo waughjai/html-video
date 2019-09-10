@@ -11,7 +11,9 @@ For a source's type attribute, you can leave off the "video/" & the constructor 
 
 ## Example
 
-    $video = new HTMLVideo
+    use WaughJ\HTMLVideo\HTMLVideo;
+
+    echo new HTMLVideo
     (
         [ [ 'src' => 'video.mp4', 'type' => 'mp4', 'media' => '(max-width:480px)' ], [ 'src' => 'movie.webm', 'type' => 'webm' ] ],
         [ 'muted' => "true", 'controls' => "controls", 'preload' => "none", 'autoplay' => "autoplay", 'width' => "1200", 'height' => "674", 'class' => "center-img" ]
