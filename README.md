@@ -28,6 +28,9 @@ will generate:
 
 ## Changelog
 
+### 0.2.1
+* Clean up code & make it less redundant
+
 ### 0.2.0
 * Allow for more attributes to each source, including media attribute
 
